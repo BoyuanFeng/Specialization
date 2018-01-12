@@ -1,0 +1,1 @@
+cifar10.py runs succesfully on specialized cifar100, loss function is also correct. Speed is 1s/epoch, accuracy is 59%

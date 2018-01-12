@@ -1,0 +1,9 @@
+a. trained vgg16 on cifar10 (cifar10vgg.py)
+b. trained vgg16 on cifar100. Accuracy is 70% on validation datasets.
+c. generate a specialized datasets from cifar100, with 10 categories accounting for 90% and
+randomly selected the other 10%.
+d. fix the non-fc layers, retrain the last three FC layers of vgg16 using weights from b on
+ c. Accuracy is 95% on datasets. (cifar100vgg.py)
+e. cifar10vgg.h5 is the weights from a
+f. cifar100vgg.h5 is the weights from b
+

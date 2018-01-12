@@ -1,0 +1,4 @@
+1. vgg16, use half layer, train on cifar100 directly. Record the training time, # of computation, # of parameters, and accuracy.
+2. Used the model in vgg16, retrain using distillation from original vgg16. Reco
+rd the training time, # of computation, # of parameters, and accuracy
+

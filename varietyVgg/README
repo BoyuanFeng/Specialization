@@ -1,0 +1,13 @@
+cifar100vgg.py: 
+actually trained from scratch for two times, both have accuracy 70% on test data and 97% on training data. Everything definitly works. The cifarvgg100.h is also trustable.
+
+v1.py:
+Half model with two FC layers. 95 Min, 250 epochs, 72% accuracy on test data.
+
+
+v2.py:
+Half model with a single FC layers. 95 Min, 250 epochs, 1% accuracy on training data
+
+
+Conclusion: Generally, we should have at least two FC layers
+
