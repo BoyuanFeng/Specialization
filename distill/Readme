@@ -7,3 +7,85 @@ d. fix the non-fc layers, retrain the last three FC layers of vgg16 using weight
 e. cifar10vgg.h5 is the weights from a
 f. cifar100vgg.h5 is the weights from b
 
+original vgg16 on original cifar100:  70.48%.
+Refer the code and vgg16 weights from geifmany
+(https://github.com/geifmany/cifar-vgg)
+
+
+half.py:
+Reduce the # of layers of vgg16 by half. Train the half model on cifar100 from random weight. Save weights as half.h
+250 epoch, takes 95 min. Accuracy is 72%
+
+
+half1.py:
+Use the same half vgg16 as half.py. Train the half model on specialized cifar100 from random weight. Save weights as half1.h
+500 epoch, takes 30 min. Accuracy is 10%.  Guess of reason: size of dataset is only 5000, too small for our model 
+
+
+half2.py:
+Use the same half vgg16 as half.py. Distill the half model from the original vgg16 with existing weights cifar100vgg.h using original cifar100. Save weights as half2.h
+250 epochs, takes 7.5 hours. Accuracy 41%.
+
+half3.py:
+Use the same half vgg16 as half.py. Distill the half model from the original vgg16 with existing weights cifar100vgg.h using the specialized cifar100. Save weights as half3.h
+250 epochs, takes 12 min. Accuracy is 15%. Guess of reason: size of dataset is only 5000, too small for our model 
+
+###old
+simple.py:
+Use 2 convolutional layers and two dense layers. Train the model on original cifar100 from random weights. Save weights as simple1.h
+Takes 95 min. Accuracy is 59%. Reason: might be reduce of model size
+
+simple1.py:
+Use the same two-layer model as simple1.py. Train the model on specialized cifar100 from random weight. 
+250 epochs. takes 10 min. Accuracy is 10%
+
+simple2.py:
+Use the same two-layer model as simple1.py. Distill from the original vgg16 with existing weights cifar100vgg.h using the original cifar100. Save weights as simple3.h
+2.8 hour. accuracy is 41%
+
+
+simple3.py:
+Use the same two-layer model as simple1.py. Distill from the original vgg16 with existing weights cifar100vgg.h using the original cifar100. Save weights as simple3.h
+5 mins. accuracy is 12%
+###old
+
+
+###new
+simple.py:
+Use 2 convolutional layers and two dense layers. Train the model on original cifar100 from random weights. Save weights as simple1.h
+Takes 95 min. Accuracy is 59%. Reason: might be reduce of model size
+
+simple1.py:
+Use the same two-layer model as simple1.py. Train the model on specialized cifar100 from random weight. 
+50 epochs. takes 1 min. Accuracy is 59.3%
+
+simple2.py:
+Use the same two-layer model as simple1.py. Distill from the original vgg16 with existing weights cifar100vgg.h using the original cifar100. Save weights as simple3.h
+2.8 hour. accuracy is 41%
+
+
+simple3.py:
+Use the same two-layer model as simple1.py. Distill from the original vgg16 with existing weights cifar100vgg.h using the original cifar100. Save weights as simple3.h
+5 mins. accuracy is 12%
+###new
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+new idea: 8 layer vgg() seems to be similar with 16 layer vgg(70%). Reduce more and more layers. See the trade off between computation&memory and accuracy.
