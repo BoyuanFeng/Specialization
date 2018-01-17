@@ -77,7 +77,7 @@ Use the same two-layer model as simple1.py. Distill from the original vgg16 with
 
 
 
-
+# Notes: In "Distilling Knowledge to Specialist Networks for Clustered Classification", the authors claimed that they achieved accuracy as 67.52% on cifar100 using VGGNet. However, here I achieved 70% on cifar100 using vgg16 on cifar100 and 72% using half vgg16.
 
 
 
