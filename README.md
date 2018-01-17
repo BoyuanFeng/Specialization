@@ -1,2 +1,2 @@
 # Specialization
-MNIST for repeating Hinton's result on distillation
+MNIST directory is for repeating Hinton's result on distillation
