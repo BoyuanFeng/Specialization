@@ -21,3 +21,10 @@ The most common method to achieve high energy efficiency is to reduce the size o
 Implemented distillation on multiple networks and benchmarks and proved the effectiveness of distillation.
 
 ---
+
+# MCDNN
+Used a series of compression and specialization to generate sequence of variants of the original model, which generates the trade between accuracy and memory/energy. Then MCDNN uses an optimization model to choose variants according to current energy and memory budgets. 
+
+---
+
+# NoScope
