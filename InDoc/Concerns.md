@@ -8,4 +8,5 @@ Concern2:
     
     
 [1] An analysis of deep neural network models for practical applications, *Canziani, Alfredo and Paszke, Adam and Culurciello, Eugenio*
+
 [2] Stanford cs231n_2017 Lecture 9 - 33, *Fei-Fei Li & Justin Johnson & Serena Yeung*
