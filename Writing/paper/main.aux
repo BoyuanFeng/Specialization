@@ -1,0 +1,133 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{russakovsky2015imagenet}
+\citation{han2016mcdnn}
+\citation{shen2016fast}
+\citation{han2016mcdnn,kang2017noscope}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overall architecture: This graph shows the overall architecture of SMART framework. The input are images. Every image will be forwarded into the scheduler. The scheduler first refers to the profiler and check whether there is a class skew. Then the scheduler will estimate the energy constraint for this image and choose the model with best accuracy given this energy constraint. The executor will follow the scheduler's decision and grasp the corresponding model from model store, which is a on-disk storage of previous train-ed models. Finally, the predicted value will be recorded by profiler for future usage.\relax }}{1}{figure.caption.1}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:Architecture}{{1}{1}{Overall architecture: This graph shows the overall architecture of SMART framework. The input are images. Every image will be forwarded into the scheduler. The scheduler first refers to the profiler and check whether there is a class skew. Then the scheduler will estimate the energy constraint for this image and choose the model with best accuracy given this energy constraint. The executor will follow the scheduler's decision and grasp the corresponding model from model store, which is a on-disk storage of previous train-ed models. Finally, the predicted value will be recorded by profiler for future usage.\relax }{figure.caption.1}{}}
+\citation{han2016mcdnn,kang2017noscope,shen2017fast}
+\citation{han2016mcdnn,kang2017noscope,shen2016fast}
+\citation{krizhevsky2009learning}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces This set of images shows the class effect. It is much easier to distinguish house, cat, dog, and tree than classifying four cat species using the same architecture. This observation meets our intuition.\relax }}{2}{figure.caption.2}}
+\newlabel{fig:classEffect}{{2}{2}{This set of images shows the class effect. It is much easier to distinguish house, cat, dog, and tree than classifying four cat species using the same architecture. This observation meets our intuition.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Class correlation}{2}{section.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-A}}Impact on accuracy}{2}{subsection.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Box plot shows specialization effect. Accuracy are grouped by number of classes. Red line is the average accuracy for each given number of classes. The blue boxes stand for the 25\% and 75\% percentile accuracy. The black lines show the minimum and maximum accuracy.\relax }}{2}{figure.caption.3}}
+\newlabel{fig:specialization}{{3}{2}{Box plot shows specialization effect. Accuracy are grouped by number of classes. Red line is the average accuracy for each given number of classes. The blue boxes stand for the 25\% and 75\% percentile accuracy. The black lines show the minimum and maximum accuracy.\relax }{figure.caption.3}{}}
+\citation{deng2009imagenet,imagenet_cvpr09}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces This table shows the interaction between class correlation and accuracy. \relax }}{3}{table.caption.4}}
+\newlabel{tab:classCorrelation}{{I}{3}{This table shows the interaction between class correlation and accuracy. \relax }{table.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces An example of semantic tree generated from CIFAR100\relax }}{3}{figure.caption.5}}
+\newlabel{fig:semanticTree}{{4}{3}{An example of semantic tree generated from CIFAR100\relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-B}}Metric: Semantic Tree}{3}{subsection.2.2}}
+\citation{han2016mcdnn,shen2016fast,kang2017noscope}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Showing the boxplot of accuracy grouped by class correlation. The first three is the boxplot for class number equals 2. The second three are the boxplots when class number equlas 5. NA means the accuracy when we do not consider class correlation. Numbers are the class correlations calculated following the definition of metric tree. \relax }}{4}{figure.caption.6}}
+\newlabel{fig:semanticTreeEffect}{{5}{4}{Showing the boxplot of accuracy grouped by class correlation. The first three is the boxplot for class number equals 2. The second three are the boxplots when class number equlas 5. NA means the accuracy when we do not consider class correlation. Numbers are the class correlations calculated following the definition of metric tree. \relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Guided search: Mapping from Classes to Model}{4}{section.3}}
+\citation{simonyan2014very}
+\citation{han2016mcdnn,shen2017fast}
+\citation{hinton2015distilling}
+\citation{hinton2015distilling}
+\citation{krizhevsky2009learning,fu2017look}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Optimization Methods}{5}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Reducing number of nodes in the softmax layer}{5}{subsection.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Reduce number of layers}{5}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}}Distillation}{5}{subsection.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}}Input Size}{5}{subsection.4.4}}
+\citation{han2016mcdnn,kang2017noscope,shen2017fast}
+\citation{razavian2014cnn,zhuang2015supervised,sun2016return}
+\citation{shen2016fast}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Important factor in real life usage: Retrain}{6}{section.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Retrain last few layers}{6}{subsection.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Repeated patterns in daily life and cold retrain}{6}{subsection.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-C}}Probability Layer}{6}{subsection.5.3}}
+\citation{huang2017densely}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-D}}Comparison with naive mask}{7}{subsection.5.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Architecture}{7}{section.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}Profiler}{7}{subsection.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}}Class catalog}{7}{subsection.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-C}}Model Store}{7}{subsection.6.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-D}}Scheduling Model}{8}{subsection.6.4}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Scheduling Model\relax }}{8}{algorithm.1}}
+\newlabel{fig:distributionDistance1}{{6a}{9}{Four classes overlapping\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:distributionDistance1}{{a}{9}{Four classes overlapping\relax }{figure.caption.7}{}}
+\newlabel{fig:distributionDistance2}{{6b}{9}{Two classes overlapping\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:distributionDistance2}{{b}{9}{Two classes overlapping\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Graphs showing the distance between data distribution of two classes groups\relax }}{9}{figure.caption.7}}
+\newlabel{fig:distributionDistance}{{6}{9}{Graphs showing the distance between data distribution of two classes groups\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Experiments}{9}{section.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-A}}Detection overhead}{9}{subsection.7.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-B}}Probability Layer}{9}{subsection.7.2}}
+\citation{hinton2015distilling,ba2014deep,dauphin2013big,chen2017learning,lopez2015unifying,kim2015compression,bucilu2006model}
+\citation{li2015towards}
+\citation{han2016mcdnn,kang2017noscope,shen2017fast}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Probability Layer Result\relax }}{10}{figure.caption.8}}
+\newlabel{fig:ProbabilityLayer}{{7}{10}{Probability Layer Result\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Comparison Between Probability Layer and Naive Mask\relax }}{10}{figure.caption.10}}
+\newlabel{fig:NaiveMask}{{8}{10}{Comparison Between Probability Layer and Naive Mask\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Saved Energy\relax }}{10}{figure.caption.11}}
+\newlabel{fig:savedEnergy}{{9}{10}{Saved Energy\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-C}}Energy efficiency}{10}{subsection.7.3}}
+\citation{han2016mcdnn,kang2017noscope,shen2017fast}
+\citation{jaderberg2014speeding,kim2015compression,romero2014fitnets,xue2014singular}
+\citation{chen2015compressing,han2015learning}
+\citation{teerapittayanon2016branchynet,panda2016conditional}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Test Probability Layer on Different Locality\relax }}{11}{table.caption.9}}
+\newlabel{tab:ProbabilityLayer1}{{II}{11}{Test Probability Layer on Different Locality\relax }{table.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Comparison with previous work}{11}{section.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VIII-A}}Distillation}{11}{subsection.8.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VIII-B}}Specialization}{11}{subsection.8.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VIII-C}}Model Compression}{11}{subsection.8.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VIII-D}}Early Stop}{11}{subsection.8.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion and Future Work}{11}{section.9}}
+\bibstyle{IEEEtran.bst}
+\bibdata{main}
+\bibcite{russakovsky2015imagenet}{{1}{}{{}}{{}}}
+\bibcite{han2016mcdnn}{{2}{}{{}}{{}}}
+\bibcite{shen2016fast}{{3}{}{{}}{{}}}
+\bibcite{kang2017noscope}{{4}{}{{}}{{}}}
+\bibcite{shen2017fast}{{5}{}{{}}{{}}}
+\bibcite{krizhevsky2009learning}{{6}{}{{}}{{}}}
+\bibcite{deng2009imagenet}{{7}{}{{}}{{}}}
+\bibcite{imagenet_cvpr09}{{8}{}{{}}{{}}}
+\bibcite{simonyan2014very}{{9}{}{{}}{{}}}
+\bibcite{hinton2015distilling}{{10}{}{{}}{{}}}
+\bibcite{fu2017look}{{11}{}{{}}{{}}}
+\bibcite{razavian2014cnn}{{12}{}{{}}{{}}}
+\bibcite{zhuang2015supervised}{{13}{}{{}}{{}}}
+\bibcite{sun2016return}{{14}{}{{}}{{}}}
+\bibcite{huang2017densely}{{15}{}{{}}{{}}}
+\bibcite{ba2014deep}{{16}{}{{}}{{}}}
+\bibcite{dauphin2013big}{{17}{}{{}}{{}}}
+\bibcite{chen2017learning}{{18}{}{{}}{{}}}
+\bibcite{lopez2015unifying}{{19}{}{{}}{{}}}
+\bibcite{kim2015compression}{{20}{}{{}}{{}}}
+\bibcite{bucilu2006model}{{21}{}{{}}{{}}}
+\bibcite{li2015towards}{{22}{}{{}}{{}}}
+\bibcite{jaderberg2014speeding}{{23}{}{{}}{{}}}
+\bibcite{romero2014fitnets}{{24}{}{{}}{{}}}
+\bibcite{xue2014singular}{{25}{}{{}}{{}}}
+\bibcite{chen2015compressing}{{26}{}{{}}{{}}}
+\bibcite{han2015learning}{{27}{}{{}}{{}}}
+\bibcite{teerapittayanon2016branchynet}{{28}{}{{}}{{}}}
+\bibcite{panda2016conditional}{{29}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers

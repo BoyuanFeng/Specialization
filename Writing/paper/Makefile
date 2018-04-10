@@ -1,21 +1,22 @@
 SOURCES	= \
-	sd.tex
+	main.tex
 
 .PHONY: default all clean
 
 default:
-	pdflatex  -shell-escape sd.tex
+	pdflatex  -shell-escape main.tex
 
 all:  
-	pdflatex  -shell-escape sd.tex
-	-	bibtex sd
-	pdflatex sd.tex
-	pdflatex sd.tex
-	thumbpdf sd.pdf
-	pdflatex sd.tex
+	pdflatex main.tex
+	bibtex main
+	pdflatex main.tex
+	pdflatex main.tex
+	#thumbpdf main.pdf
+	#pdflatex main.tex
 
 clean:
-	-rm -rf sd.pdf sd.synctex.gz sd.out sd.tpt sd.aux sd.bbl sd.blg sd.dvi sd.log sd.ps *~
+	-rm -rf main.pdf main.synctex.gz main.out main.tpt main.aux main.bbl main.blg main.dvi main.log main.ps *~
 
 sources:
 	@echo  ${SOURCES}
+
