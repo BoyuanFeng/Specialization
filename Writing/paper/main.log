@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.4.10)  10 APR 2018 10:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.4.10)  10 APR 2018 12:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1110,27 +1110,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )))
-(./main.aux
-
-! Package natbib Error: Bibliography not compatible with author-year citations.
-
-(natbib)                Press <return> to continue in numerical citation style.
-
-
-See the natbib package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.133 ...and\NAT@force@numbers{}\NAT@force@numbers
-                                                  
-? <return>
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
-? 
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 388.
@@ -1224,7 +1204,7 @@ Package epstopdf Info: Source file: <complexArchitecture.ps>
 (epstopdf)                    date: 2018-04-10 16:35:24
 (epstopdf)                    size: 30915 bytes
 (epstopdf)             Output file: <complexArchitecture-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 11150 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER complexArchitecture
 .ps complexArchitecture-ps-converted-to.pdf>
@@ -1233,7 +1213,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER complexArchitecture.ps complexArchitecture
 -ps-converted-to.pdf)...disabled (restricted).
 
 Package epstopdf Info: Result file: <complexArchitecture-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 11150 bytes.
 <complexArchitecture-ps-converted-to.pdf, id=131, 911.405pt x 569.12625pt>
 File: complexArchitecture-ps-converted-to.pdf Graphic file (type pdf)
@@ -1288,7 +1268,7 @@ Package epstopdf Info: Source file: <Accuracy.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 12377 bytes
 (epstopdf)             Output file: <Accuracy-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 6901 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER Accuracy.ps Accurac
 y-ps-converted-to.pdf>
@@ -1297,7 +1277,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER Accuracy.ps Accuracy-ps-converted-to.pdf).
 ..disabled (restricted).
 
 Package epstopdf Info: Result file: <Accuracy-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 6901 bytes.
 
 <Accuracy-ps-converted-to.pdf, id=136, 137.51375pt x 105.39375pt>
@@ -1338,7 +1318,7 @@ Package epstopdf Info: Source file: <Accuracy.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 12377 bytes
 (epstopdf)             Output file: <Accuracy-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 6901 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER Accuracy.ps Accurac
 y-ps-converted-to.pdf>
@@ -1347,7 +1327,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER Accuracy.ps Accuracy-ps-converted-to.pdf).
 ..disabled (restricted).
 
 Package epstopdf Info: Result file: <Accuracy-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 6901 bytes.
 File: Accuracy-ps-converted-to.pdf Graphic file (type pdf)
  <use Accuracy-ps-converted-to.pdf>
@@ -1361,7 +1341,7 @@ Package epstopdf Info: Source file: <specialization.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 41835 bytes
 (epstopdf)             Output file: <specialization-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 14435 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER specialization.ps s
 pecialization-ps-converted-to.pdf>
@@ -1370,7 +1350,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER specialization.ps specialization-ps-conver
 ted-to.pdf)...disabled (restricted).
 
 Package epstopdf Info: Result file: <specialization-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:07
 (epstopdf)                    size: 14435 bytes.
  <specialization-ps-converted-to.pdf, id=165, 578.16pt x 433.62pt>
 File: specialization-ps-converted-to.pdf Graphic file (type pdf)
@@ -1394,7 +1374,7 @@ Package epstopdf Info: Source file: <semanticTree.ps>
 (epstopdf)                    date: 2018-04-10 16:35:24
 (epstopdf)                    size: 21215 bytes
 (epstopdf)             Output file: <semanticTree-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 9648 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER semanticTree.ps sem
 anticTree-ps-converted-to.pdf>
@@ -1403,7 +1383,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER semanticTree.ps semanticTree-ps-converted-
 to.pdf)...disabled (restricted).
 
 Package epstopdf Info: Result file: <semanticTree-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 9648 bytes.
 <semanticTree-ps-converted-to.pdf, id=201, 1082.0425pt x 370.38374pt>
 File: semanticTree-ps-converted-to.pdf Graphic file (type pdf)
@@ -1417,7 +1397,7 @@ Package epstopdf Info: Source file: <metricTreeEffect.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 40735 bytes
 (epstopdf)             Output file: <metricTreeEffect-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 14161 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER metricTreeEffect.ps
  metricTreeEffect-ps-converted-to.pdf>
@@ -1426,7 +1406,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER metricTreeEffect.ps metricTreeEffect-ps-co
 nverted-to.pdf)...disabled (restricted).
 
 Package epstopdf Info: Result file: <metricTreeEffect-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 14161 bytes.
 <metricTreeEffect-ps-converted-to.pdf, id=217, 578.16pt x 433.62pt>
 File: metricTreeEffect-ps-converted-to.pdf Graphic file (type pdf)
@@ -1520,7 +1500,7 @@ Package epstopdf Info: Source file: <profiler1.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 55631 bytes
 (epstopdf)             Output file: <profiler1-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 17586 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER profiler1.ps profil
 er1-ps-converted-to.pdf>
@@ -1529,7 +1509,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER profiler1.ps profiler1-ps-converted-to.pdf
 )...disabled (restricted).
 
 Package epstopdf Info: Result file: <profiler1-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 17586 bytes.
  <profiler1-ps-converted-to.pdf, id=277, 578.16pt x 433.62pt>
 File: profiler1-ps-converted-to.pdf Graphic file (type pdf)
@@ -1541,7 +1521,7 @@ Package epstopdf Info: Source file: <profiler2.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 56972 bytes
 (epstopdf)             Output file: <profiler2-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 17760 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER profiler2.ps profil
 er2-ps-converted-to.pdf>
@@ -1550,7 +1530,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER profiler2.ps profiler2-ps-converted-to.pdf
 )...disabled (restricted).
 
 Package epstopdf Info: Result file: <profiler2-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:38
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 17760 bytes.
 
 <profiler2-ps-converted-to.pdf, id=278, 578.16pt x 433.62pt>
@@ -1585,7 +1565,7 @@ Package epstopdf Info: Source file: <savedEnergy.ps>
 (epstopdf)                    date: 2018-04-10 16:35:26
 (epstopdf)                    size: 42554 bytes
 (epstopdf)             Output file: <savedEnergy-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:39
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 15500 bytes
 (epstopdf)             Command: <ps2pdf -dEPSCrop -dNOSAFER savedEnergy.ps save
 dEnergy-ps-converted-to.pdf>
@@ -1594,7 +1574,7 @@ runsystem(ps2pdf -dEPSCrop -dNOSAFER savedEnergy.ps savedEnergy-ps-converted-to
 .pdf)...disabled (restricted).
 
 Package epstopdf Info: Result file: <savedEnergy-ps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-10 10:29:39
+(epstopdf)                    date: 2018-04-10 10:50:08
 (epstopdf)                    size: 15500 bytes.
 <savedEnergy-ps-converted-to.pdf, id=308, 578.16pt x 433.62pt>
 File: savedEnergy-ps-converted-to.pdf Graphic file (type pdf)
@@ -1677,7 +1657,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1096.
 Here is how much of TeX's memory you used:
  20358 strings out of 493029
  373132 string characters out of 6136234
- 460682 words of memory out of 5000000
+ 460695 words of memory out of 5000000
  23417 multiletter control sequences out of 15000+600000
  37522 words of font info for 76 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
@@ -1692,7 +1672,7 @@ sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8
 a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (12 pages, 1088975 bytes).
+Output written on main.pdf (12 pages, 1088055 bytes).
 PDF statistics:
  424 PDF objects out of 1000 (max. 8388607)
  370 compressed objects within 4 object streams

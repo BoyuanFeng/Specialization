@@ -166,10 +166,7 @@ S.~Teerapittayanon, B.~McDanel, and H.~Kung, ``Branchynet: Fast inference via
 \bibitem{panda2016conditional}
 P.~Panda, A.~Sengupta, and K.~Roy, ``Conditional deep learning for
   energy-efficient and enhanced pattern recognition,'' in \emph{Design,
-  Automation \& Test @article{jaderberg2014speeding, title={Speeding up
-  convolutional neural networks with low rank expansions}, author={Jaderberg,
-  Max and Vedaldi, Andrea and Zisserman, Andrew}, journal={arXiv preprint
-  arXiv:1405.3866}, year={2014} }in Europe Conference \& Exhibition (DATE),
-  2016}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2016.
+  Automation \& Test in Europe Conference \& Exhibition (DATE), 2016}.\hskip
+  1em plus 0.5em minus 0.4em\relax IEEE, 2016.
 
 \end{thebibliography}
