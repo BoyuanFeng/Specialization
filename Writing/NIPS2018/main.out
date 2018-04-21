@@ -1,0 +1,30 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Class correlation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Impact on accuracy}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Metric: Semantic Tree}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Guided search: Mapping from Classes to Model}{}% 5
+\BOOKMARK [1][-]{section.4}{Optimization Methods}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Reducing number of nodes in the softmax layer}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Reduce number of layers}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Distillation}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.4}{Input Size}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Important factor in real life usage: Retrain}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Retrain last few layers}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{Repeated patterns in daily life and cold retrain}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Probability Layer}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.4}{Comparison with naive mask}{section.5}% 15
+\BOOKMARK [1][-]{section.6}{Architecture}{}% 16
+\BOOKMARK [2][-]{subsection.6.1}{Profiler}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.2}{Class catalog}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.3}{Model Store}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.4}{Scheduling Model}{section.6}% 20
+\BOOKMARK [1][-]{section.7}{Experiments}{}% 21
+\BOOKMARK [2][-]{subsection.7.1}{Detection overhead}{section.7}% 22
+\BOOKMARK [2][-]{subsection.7.2}{Probability Layer}{section.7}% 23
+\BOOKMARK [2][-]{subsection.7.3}{Energy efficiency}{section.7}% 24
+\BOOKMARK [1][-]{section.8}{Comparison with previous work}{}% 25
+\BOOKMARK [2][-]{subsection.8.1}{Distillation}{section.8}% 26
+\BOOKMARK [2][-]{subsection.8.2}{Specialization}{section.8}% 27
+\BOOKMARK [2][-]{subsection.8.3}{Model Compression}{section.8}% 28
+\BOOKMARK [2][-]{subsection.8.4}{Early Stop}{section.8}% 29
+\BOOKMARK [1][-]{section.9}{Conclusion and Future Work}{}% 30
