@@ -1,0 +1,1 @@
+I have just printed out a few images for bear and beaver in CIFAR100. File name is the index of the image in training dataset. For example, if train_data[49380] is printed in the form of image, the graph will be 49380.png in bear directory.
