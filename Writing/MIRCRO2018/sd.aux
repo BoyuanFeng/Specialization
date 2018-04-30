@@ -1,0 +1,87 @@
+\relax 
+\citation{he2016deep}
+\citation{russakovsky2015imagenet}
+\citation{han2016mcdnn}
+\citation{shen2016fast}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overall architecture: This graph shows the overall architecture of SMART framework. The input are images. Every image will be forwarded into the scheduler. The scheduler first refers to the profiler and check whether there is a class skew. Then the scheduler will estimate the energy constraint for this image and choose the model with best accuracy given this energy constraint. The executor will follow the scheduler's decision and grasp the corresponding model from model store, which is a on-disk storage of previous train-ed models. Finally, the predicted value will be recorded by profiler for future usage.\relax }}{1}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:Architecture}{{1}{1}}
+\citation{szegedy2015going}
+\citation{simonyan2014very}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Summary of parameters and computation usage\relax }}{2}}
+\newlabel{tab:compare}{{1}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Impact of Class on Accuracy}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Specialization}{2}}
+\@writefile{toc}{\contentsline {subparagraph}{What is Specialization}{2}}
+\@writefile{toc}{\contentsline {subparagraph}{What is the benefit of specialization}{2}}
+\@writefile{toc}{\contentsline {subparagraph}{How can we implement Specialization}{2}}
+\citation{huang2017densely}
+\citation{imagenet_cvpr09}
+\@writefile{toc}{\contentsline {subparagraph}{When should we implement Specialization}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Class Effect}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Optimization Methods}{3}}
+\citation{hinton2015distilling}
+\citation{hinton2015distilling}
+\citation{simonyan2014very}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Input Size}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Distillation}{4}}
+\@writefile{toc}{\contentsline {subparagraph}{What is Distillation and What is the benefit of distillation}{4}}
+\@writefile{toc}{\contentsline {subparagraph}{How can we implement distillation}{4}}
+\@writefile{toc}{\contentsline {subparagraph}{When should we implement distillation}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Reducing number of nodes in the softmax layer}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Reduce number of layers}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Interaction between class effect and optimization methods}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Important factor in real life usage: Retrain}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Repeated patterns in daily life and cold retrain}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Retrain the last few layers}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Probability Layer}{4}}
+\@writefile{toc}{\contentsline {subparagraph}{What is Probability Layer and What is the benefit of Probability Layer}{4}}
+\@writefile{toc}{\contentsline {subparagraph}{How to implement probability layer}{5}}
+\@writefile{toc}{\contentsline {subparagraph}{Good results for probability layer}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Probability Layer Result\relax }}{5}}
+\newlabel{fig:ProbabilityLayer}{{2}{5}}
+\@writefile{toc}{\contentsline {subparagraph}{Intuition and Shortcomings for probability layer}{5}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Test Probability Layer on Different Locality\relax }}{6}}
+\newlabel{tab:ProbabilityLayer1}{{2}{6}}
+\@writefile{toc}{\contentsline {subparagraph}{Comparison with naive mask}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Comparison Between Probability Layer and Naive Mask\relax }}{7}}
+\newlabel{fig:NaiveMask}{{3}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Old Content for probability layer}{7}}
+\@writefile{toc}{\contentsline {subparagraph}{Pre-knowledge}{7}}
+\@writefile{toc}{\contentsline {subparagraph}{Run-time Probability}{7}}
+\@writefile{toc}{\contentsline {subparagraph}{How can we implement Probability Layer}{7}}
+\@writefile{toc}{\contentsline {subparagraph}{When should we implement Probability Layer}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Architecture}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Profiler}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Class catalog}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Model Store}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Scheduling Model}{8}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Scheduling Model\relax }}{8}}
+\citation{bucilu2006model}
+\citation{hinton2015distilling}
+\citation{romero2014fitnets}
+\citation{han2016mcdnn}
+\bibstyle{named}
+\bibdata{sd}
+\bibcite{bucilu2006model}{\citeauthoryear {Bucilu\IeC {\v a} \bgroup \em  et al.\egroup }{2006}}
+\bibcite{imagenet_cvpr09}{\citeauthoryear {Deng \bgroup \em  et al.\egroup }{2009}}
+\bibcite{han2016mcdnn}{\citeauthoryear {Han \bgroup \em  et al.\egroup }{2016}}
+\bibcite{he2016deep}{\citeauthoryear {He \bgroup \em  et al.\egroup }{2016}}
+\bibcite{hinton2015distilling}{\citeauthoryear {Hinton \bgroup \em  et al.\egroup }{2015}}
+\bibcite{huang2017densely}{\citeauthoryear {Huang \bgroup \em  et al.\egroup }{2017}}
+\bibcite{romero2014fitnets}{\citeauthoryear {Romero \bgroup \em  et al.\egroup }{2014}}
+\bibcite{russakovsky2015imagenet}{\citeauthoryear {Russakovsky \bgroup \em  et al.\egroup }{2015}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Model Choice\relax }}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Experiments}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Effectiveness of specialization}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Effectiveness of distillation}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Effectiveness of pre-knowledge}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Effectiveness of run-time probability}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Comparison with previous work}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Specialization}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Distillation}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion and Future Work}{9}}
+\bibcite{shen2016fast}{\citeauthoryear {Shen \bgroup \em  et al.\egroup }{2016}}
+\bibcite{simonyan2014very}{\citeauthoryear {Simonyan and Zisserman}{2014}}
+\bibcite{szegedy2015going}{\citeauthoryear {Szegedy \bgroup \em  et al.\egroup }{2015}}
