@@ -12,7 +12,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{amsmath}
-
+\usepackage{xcolor}
 
 \title{Formatting instructions for NIPS 2018}
 
@@ -61,6 +61,8 @@
 % \nipsfinalcopy is no longer used
 
 \maketitle
+
+{\color{blue}
 
 \begin{abstract}
   We can meet thousands of people in our life. To recognize all of these people, a complex model which is able to classify all these people are needed. However, in a particular environment, like our home or office, only less than ten people appears. Thus a smaller model could be sufficient for recognition in this scenario. Assuming the number of classes and class distribution are fixed, the question is how to use this information? In recent works, transfer learning shows benefit and becomes the dominant method. We shown intrinsic problems of using transfer learning in this scenario. Instead of retraining, we brought up a method, called the probability layer, which can avoid retraining totally and performs better than transfer learning.
@@ -118,7 +120,7 @@ Now, we are going to derive the formulation for rescaling, which is similar to \
 \begin{equation}
     p_i = P_t(i|X)
 \end{equation}. 
-
+}
 
 
 
