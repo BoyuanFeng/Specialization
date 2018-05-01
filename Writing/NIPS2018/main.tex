@@ -62,7 +62,6 @@
 
 \maketitle
 
-{\color{blue}
 
 \begin{abstract}
   We can meet thousands of people in our life. To recognize all of these people, a complex model which is able to classify all these people are needed. However, in a particular environment, like our home or office, only less than ten people appears. Thus a smaller model could be sufficient for recognition in this scenario. Assuming the number of classes and class distribution are fixed, the question is how to use this information? In recent works, transfer learning shows benefit and becomes the dominant method. We shown intrinsic problems of using transfer learning in this scenario. Instead of retraining, we brought up a method, called the probability layer, which can avoid retraining totally and performs better than transfer learning.
@@ -71,7 +70,7 @@
 
 \section{Introduction}
 % First paragraph: CNN performs very well at lab setting
-Convolutional neural network (CNN) plays an important role in image recognition. In 2012, AlexNet \cite{krizhevsky2012imagenet} achieved a top-5 error of 17\% on ImageNet \cite{deng2009imagenet}, while previous method could only achieve a top-5 error of 25.7\%. Since then, CNNs have become the dominant method and main research direction in image recognition. In 2015, ResNet \cite{he2016deep} achieves a top-5 error of 3.57\%. Considering that the estimated human classification error on ImageNet is 5.1\%, we can conclude that CNNs have gained the ability of performing better than human.
+Convolutional neural network (CNN) plays an important role in image recognition. In 2012, AlexNet \cite{krizhevsky2012imagenet} achieved a top-5 error of 17\% on ImageNet \cite{deng2009imagenet}, while previous method could only achieve a top-5 error of 25.7\%. Since then, CNNs have become the dominant method and main research direction in image recognition. In 2015, ResNet \cite{he2016deep} achieves a top-5 error of 3.57\%. Considering that the estimated human classification error on ImageNet is 5.1\% \cite{russakovsky2015imagenet}, we can conclude that CNNs have gained the ability of performing better than human.
 
 
 
@@ -105,7 +104,10 @@ In short, our contribution are three folds.
 \section{Problems in Automatical Transfer Learning}
 
 
+
+
 \section{Probability Layer}
+% First paragraph: give the overview of probability layer
 The key idea of probability layer is rescaling. In CNN models, for each image as an input, the model will give a vector of estimated probability of each class 
 \begin{equation}
     \vec{p} = (p_1, p_2, ..., p_n)
@@ -116,17 +118,89 @@ The key idea of probability layer is rescaling. In CNN models, for each image as
 \end{equation}
 as the true class. The prediction will be made by CNNs individually, assuming a sequence of images is independent and identically distributed (\textit{i.i.d}). In real life, this assumption does not hold and strong spatial and temporal locality may exist. Given the number of classes, class type, and in-class distribution, we can adjust the vector of estimated probability appropriately and give a better estimation of the true label. To achieve this target and avoid retraining, rescaling is a natural choice. Rescaling is a topic in statistics \cite{saerens2002adjusting} and has not been discussed in CNN context yet. To the best of our knowledge, we are the first to discuss rescaling in CNN context. In this section, we will derive the basic form of rescaling and give the method for implementing probability layer. Through experiments, we found that rescaling does not lead to improvement in performance automatically. To use probability layer appropriately, a detailed analysis on logits is needed and we will show the analysis in section $5$. To give a better solution of probability layer, the full version of probability layer will be given in section $5$.
 
+% Second paragraph: give the derivation of the formula.
 Now, we are going to derive the formulation for rescaling, which is similar to \cite{saerens2002adjusting}. We can treat CNNs as a classifier to estimate probability $p_i$ for the label $i$ given the input image $X$
 \begin{equation}
-    p_i = P_t(i|X)
+    p_i = P(i|X)
 \end{equation}. 
+{\color{blue}
+
+The output of model with and without rescaling are
+\begin{equation}
+    P_t(i|X) = \frac{P_t(X|i) \cdot P_t(i)}{P_t(x)}
+\end{equation}
+and
+\begin{equation}
+    P(i|X) = \frac{P(X|i) \cdot P(i)}{P(x)}
+\end{equation}
+respectively. Here $t$ means training setting. We use probability with subscription $P_t$ for the result without rescaling and $P$ without subscription $t$ for the result after rescaling. We have two assumptions. First, $P_t(x|i)$ equals $P(x|i)$ approximately since the selection of input x is randomly. Second, we require the input image is normalized such that $P_t(x)$ approximately equals $P(x)$. Transforming equation $4$ and $5$ into 
+\begin{equation}
+    P_t(x|i) = \frac{P_t(i|x) \cdot P_t(x)}{P_t(i)}
+\end{equation}
+and
+\begin{equation}
+    P(x|i) = \frac{P(i|x) \cdot P(x)}{P(i)}
+\end{equation}
+and following our two assumptions, we can derive that 
+\begin{equation}
+    P(i|X) \propto \frac{P(i)}{P_t(i)} \cdot P_t(i|X)
+\end{equation}
+To complete the rescaling, the only thing we need to know is the class distribution in both source domain $P_t(i)$ and target domain $P(i)$, as well as the original prediction from the model $P_t(i|X)$.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{PLvsRetrain.png}
+        \caption{Various number of classes}
+        \label{fig:complexNumber}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{VaryingDistribution.png}
+        \caption{Ten classes occupying various percentage}
+        \label{fig:complexDistribution}
+    \end{subfigure}
+    \caption{Probability layer on denseNet}\label{fig:complex}
+\end{figure}
+
+% Third paragraph: Experiment setting
+We evaluate probability layer's ability in making use of environment on number of classes as well as in-class distribution when number of classes is fixed. The dataset is a subset of CIFAR100 \cite{krizhevsky2009learning}. CIFAR100 \cite{krizhevsky2009learning} is a dataset with 100 classes and each class has 500 training images and 100 testing images. We trained denseNet \cite{huang2017densely} on original CIFAR100 training datasets. For testing part, to evaluate the performance of probability layer under various conditions, we choose a subset of testing images as the new testing dataset. For various number of classes, we select a subset of classes and each class has equal number of images. For testing the ability to adapt to a dataset with a few major classes and many minor classes, we choose $10$ classes as the major class, select all $100$ testing images for each class, and randomly choose a fixed number of testing images in other $90$ classes, according to the desired percentage that $10$ major classes occupy. For implementing probability layer, we calculate the percentage of every class in the generated testing dataset and set up the parameters in probability layer correspondingly. When implementing transfer learning, we use the same model trained on CIFAR100 and retrain on the same generated training dataset. For the retraining process, we retrain all fully-connected layers after convolutional layers, since this is the method reported to have best accuracy gain (CITATIONS). In the retraining process, various epoches were used, i.e. $1$, $5$, $30$. The maximum epoch tried is $30$ because we consider both latency and energy which could be used in normal operation instead of retraining. For example, if the generated training dataset has 10 classes and 500 images in each class, retraining for $30$ epochs means that $150,000$ images will be processed by the models. Since generally the image will be processed every one second, the machine can proceed around $41$ more hours without so many retraining.
+
+% Forth paragraph: Show probability layer works on complex models
+Fig. \ref{fig:complexNumber} shows the comparison between probability layer and transfer learning on various number of classes. Original model represents the model with neither probability layer nor transfer learning, i.e. without adaption to the new dataset. We can find that the model with probability layer performs consistently better than the model without probability layer. When number of classes is less than $10$, probability layer can boost the top-1 accuracy to be more than 95\%, which is better than the human's ability in recognition, reported to be a top-5 error of 5.1\% \cite{russakovsky2015imagenet}. When number of classes is less than 10, probability layer's performance is at most 2\% lower than retraining for $5$ rounds. As number of classes becomes larger than $10$, probability layer would always perform better than retraining for $5$ rounds. The advantage of probability layer over retraining increases as number of classes increases. One point worth noting is that when the number of classes increases over $90$, retraining would bring worse accuracy than original model without retraining. In contrast, the probability layer can still bring 2\% advantage over original model. All these observations indicate that probability layer has better ability in using various environment, especially when the number of classes gets larger.
+
+Fig. \ref{fig:complexNumber} shows the accuracy on testing data when there are $10$ major classes occupying various weights among $100$ classes. The other $90$ classes are minor classes with same weights. While the weights increase from $50$\% to $100$\%, probability layer performs consistently better than the retraining for $5$ or $1$ rounds. Even if we retrain the model for $30$ rounds, probability layer still performs better when weights of $10$ major classes is less than $85$\%. When the weights increase over $85$\%, the advantage of retraining for $30$ rounds over probability layer is at most $0.5$\%. Retraining for $30$ rounds takes $60$ seconds and xxx GFLOPS. Considering the intensive energy-consumption and time latency of retraining for $30$ rounds, this benefit of $0.5$\% advantage is not so significant. We should also note that retraining for $30$ rounds would make the accuracy to be much lower than original model when weights of major classes is less than 75\%. Since we need to choose a method before we start in automatically using environment information, we can conclude that probability layer is the most suitable method.
+
+% Fifth paragraph: show probability layer not work on simple model
+Although probability layer boost the top-1 accuracy of complex model a lot, shallow models cannot get the same benefits. We train a shallow model with $4$ convolutional layers and $3$ fully connected layers on CIFAR100 and test the model with probability layer on a generated dataset with $10$ classes and each class has $500$ images. Without probability layer, the accuracy is 30\%. The accuracy will only increase 2\% when adding probability layer. IN contrast, if we both train and test on the generated dataset, the accuracy is 55\%. From these results, we can find that implementing rescaling does not guarantee a same performance with transfer learning. We will give a detailed analysis on the intuition behind the probability layer and provide a guidance on which model probability layer can bring benefit.
+
+
+
 }
 
 
 
 
 \section{Analysis on Logits}
+% First paragraph: Discuss the intuition behind the probability layer and why it sometimes works and sometimes not. Introduce the importance of logits and give a summary
 
+
+
+% Second paragraph: Present the logits of simple models
+
+
+
+% Third paragraph: Present the logits of complex models
+
+
+% Forth paragraph: Introduce the metric for whether model is confident about its prediction
+
+
+
+% Fifth paragraph: Introduce the metric for whether a model can benefit from probability layer.
 
 
 \section{Experiments}
