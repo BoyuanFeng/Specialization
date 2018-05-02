@@ -123,7 +123,7 @@ Now, we are going to derive the formulation for rescaling, which is similar to \
 \begin{equation}
     p_i = P(i|X)
 \end{equation}. 
-{\color{blue}
+
 
 The output of model with and without rescaling are
 \begin{equation}
@@ -142,7 +142,7 @@ and
     P(x|i) = \frac{P(i|x) \cdot P(x)}{P(i)}
 \end{equation}
 and following our two assumptions, we can derive that 
-\begin{equation}
+\begin{equation}\label{eqn:rescaling}
     P(i|X) \propto \frac{P(i)}{P_t(i)} \cdot P_t(i|X)
 \end{equation}
 To complete the rescaling, the only thing we need to know is the class distribution in both source domain $P_t(i)$ and target domain $P(i)$, as well as the original prediction from the model $P_t(i|X)$.
@@ -179,28 +179,126 @@ Although probability layer boost the top-1 accuracy of complex model a lot, shal
 
 
 
-}
 
 
 
 
+{\color{blue}
 \section{Analysis on Logits}
 % First paragraph: Discuss the intuition behind the probability layer and why it sometimes works and sometimes not. Introduce the importance of logits and give a summary
+The intuition of probability layer is rescaling and logits plays a pivotal role in this process. Rescaling means that the classes which has been observed frequently in an environment tends to be selected as the true label. For example, if the original model is trained on CIFAR100, then $P_t(i)$ for any class $i$ is $1\%$. Assuming in the testing dataset, first $10$ classes contain $1000$ images together and the other $90$ classes contain $5$ images individually. In this dataset, $P(i)$ for each of the $10$ major classes is $6.9$\% and $P(i)$ is $0.3$\%. Following equation \eqref{eqn:rescaling}, if the class $i$ accounts for $P_t(i)$ in training dataset and $P(i)$ in the testing dataset, the predicted probability from original model will be rescaled by multiplying $P(i)/P_t(i)$. Thus, the predicted probability of first $10$ classes will be rescaled to be $6.9 \cdot P_t(i|X)$ and the value for the other $90$ classes will be $0.3 \cdot P_t(i|X)$. In other words, if there is no strong sign that one image belongs to the other $90$ classes, the model with probability layer will choose the predicted label from first $10$ classes. For models with precise logits, i.e. high top-5 accuracy, this knowledge would be very helpful. However, for a model with imprecise logits, this knowledge does not help a lot, since the true label usually does not have the highest logits even within the first $10$ classes. Thus logits plays a pivotal role in the success of probability layer and the importance of logits has not been found in existing papers \cite{saerens2002adjusting} from statistics, since number of classes is limited to be $2$. Although less number of classes tends to have a more precise logits, it is unrealistic to require so, since hundreds or even thousands of classes are common in dataset in current practice, which would become intrinsic obstacle for implementing probability layer on some models. Fortunately, the precise of logits also depends on models. Deeper models tends to give more precise logits. We will present the logits of various models to show so and provide a metric on this precision. Finnaly, we will give an updated version of probability layer based on the analysis on logits.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| } 
+ \hline
+ TrueLabel & 1st & 2nd & 3rd & 4th & 5th \\
+ \hline
+ Seal   &   Otter  &   Seal   &   Beaver & NA & NA \\
+        &   89.0\%          &   6.87\%          &   3.3\%   & & \\
+ \hline
+ Mushroom   &   Mushroom   & NA & NA & NA & NA \\
+            &   99.5\%  &&&&\\
+ \hline
+ Camel  &   Dinosaur & Camel & Kangaroo & Crocodile & NA \\
+        &   86.9\%  &   8.0\%   &   3.0\%   &   1.1\%   &   \\    
+ \hline
+ Butterfly  &   Butterfly & Beetle & Shrew & Gecko & NA \\
+        &   84.5\%  &   7.2\%  &   3.6\%   &   3.1\%   &      \\
+ \hline
+ Skunk  &   Skunk   &   Wale    &   NA  &   NA  &   NA  \\
+        &   58.6\%  &   40.4\%  &       &       &       \\
+ \hline
+\end{tabular}
+\end{center}
+\caption{Logits from denseNet on sampled images from CIFAR100}
+\label{table:logitsDenseNet}
+\end{table}
+% Second paragraph: Present the logits of denseNet
+Logits from complex models tends to have strong confidence in its prediction, which favors probability layer. Table \ref{table:logitsDenseNet} shows the logits from denseNet on sampled images from CIFAR100. The first column shows the five randomly sampled classes. Each row represents the logits of a randomly selected image from the corresponding class. We list the top-5 predictions for each image ranked by the predicted probability. We rule out the labels whose predicted probability is less than $1$\% and mark the corresponding slot as NA. From the table we can find that denseNet has strong confidence in its prediction. First, high probabilities usually appear, like $89.0$\%, $99.5$\%, $99.9$\%, $86.9$\%, AND $84.5$\%. Secondly, far each image, generally only less than $4$ predictions are given, which would make the rescaling very feasible. 
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| } 
+ \hline
+ TrueLabel & 1st & 2nd & 3rd & 4th & 5th \\
+ \hline
+ Seal   &   Seal  &      &    &  &  \\
+        &   99.9\%          &      &      & & \\
+ \hline
+ Mushroom   &   Mushroom   & Wolf & Fox & NA & NA \\
+            &   58.7\%  &   28.4\% &    11.0\%     &&\\
+ \hline
+ Camel  &   Orchid & Tractor & Bear & Fox & Raccon \\
+        &   58.2\%  &   15.5\%   &   15.1\%   &   5.3\%   & 4.5\%  \\    
+ \hline
+ Butterfly  &   Shrew & Squirrel & NA & NA & NA \\
+        &   97.0\%\%  &   2.8\%  &      &      &      \\
+ \hline
+ Skunk  &   Shrew   &   Halibut &   Camel   &   Tank    &   NA   \\
+        &   45.2\%  &   28.5\%  &   14.4\%  &   10.9\%  &       \\
+ \hline
+\end{tabular}
+\end{center}
+\caption{Logits from Model1 on sampled images from CIFAR100}
+\label{table:logitsSimple}
+\end{table}
+% Third paragraph: Present the logits of a shallow model with 4 conv and 3 fc
+Logits from shallow models tends to have weak confidence in its prediction, in which case that probability layer cannot help too much. Table \ref{table:logitsSimple} shows the logits on the same images from a shallow model with $4$ convolutional layers and $3$ fully connected layers. From the table, we can find that the shallow model also has strong confidence in its prediction and only gives a few suggestion. However, these suggestions sometimes are totally wrong and the true label is not with in the top-5 labels. Actually, the logit corresponding with the true label is usually not the highest one even within a set of $10$ classes, which obstacle the benefit from probability layer. By comparison between logits from denseNet and the shallow model, we can conclude that the precision of logits is the key on success of probability layers. A model with higher top-5 accuracy could gain more benefit from the probability layer.
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c| } 
+ \hline
+ Model & Threshold & Total Number & Correct Number & Top-1 Accuracy \\
+ \hline
+ denseNet & 75 & 7815 & 6504 & 83.22\% \\
+ \hline
+ denseNet & 90 & 6647 & 5881 & 88.48\% \\
+ \hline
+ denseNet & 95 & 5973 & 5442 & 91.11\% \\
+ \hline
+ denseNet & 99 & 4751 & 4514 & 95.01\% \\
+ \hline
+ denseNet & 99.9 & 3337 & 4370 & 97.99\% \\
+ \hline
+ denseNet & 99.99 & 2237 & 2214 & 98.97\% \\
+ \hline
+ shallowNet & 75 & 7938 & 2930 & 36.91\% \\
+ \hline
+ shallowNet & 90 & 6703 & 2697 & 40.24\% \\
+ \hline
+ shallowNet & 95 & 5949 & 2545 & 42.78\% \\
+ \hline
+ shallowNet & 99 & 4672 & 2240 & 47.94\% \\
+ \hline
+ shallowNet & 99.9 & 3294 & 1836 & 55.73\% \\
+ \hline
+ shallowNet & 99.99 & 2406 & 1507 & 62.64\% \\
+ \hline
+\end{tabular}
+\end{center}
+\caption{Total number of images with predicted accuracy higher than threshold and the accuracy within these images. The number of testing images is $10000$.}
+\label{table:threshold}
+\end{table}
+% Fourth paragraph: High confidence and correction rate.
+If a model have a strong confidence in a prediction, like 90\% or even 99\%, the accuracy would be much higher than the model's average accuracy. Table \ref{table:threshold} shows the results from denseNet and shallowNet on CIFAR100. We can find that 78\% testing images will gain predicted accuracy greater than 75\% and the accuracy within these images are 83.22\%, which is much higher than the average top-1 accuracy of denseNet. If we increase the threshold to 95\%, there are still near 60\% images and the accuracy will increase to 91\%. In other word, if the original model gives a predicted probability greater than 91\%, the accuracy will be 91\% and we should better believe in the model instead of rescaling. Thus we give a full version of probability layer
+\begin{equation}
+P(i|X) \propto \begin{cases}
+P_t(i|X), &\text{if $P_t(i|X)> \omega$}\\
+\frac{P(i)}{P_t(i)} \cdot P_t(i|X), &\text{$o.w.$}
+\end{cases}
+\end{equation},
+where $\omega$ is the threshold and we can treat $\omega$ as a hyper-parameter and adjust $\omega$ for desired accuracy. 
+
+% Fifth paragraph: Give a full version of probability layer
 
 
 
-% Second paragraph: Present the logits of simple models
+}
 
-
-
-% Third paragraph: Present the logits of complex models
-
-
-% Forth paragraph: Introduce the metric for whether model is confident about its prediction
-
-
-
-% Fifth paragraph: Introduce the metric for whether a model can benefit from probability layer.
 
 
 \section{Experiments}
@@ -288,6 +386,9 @@ We have also done some experiments to support our result. Figure \ref{fig:NaiveM
 \caption{Comparison Between Probability Layer and Naive Mask}
 \label{fig:NaiveMask}
 \end{figure}
+
+\section{Conclusion}
+Transfer learning has numerous intrinsic problems for using environment automatically. When the target classes does not change, probability layer is the alternative way to use environment without retraining and shows comparable or even better performance than transfer learning. Through analysis on logits, a metric is given such that, without actually running, we can decide whether probability layer can bring benefit to a model. Further, probability layer will not obstacle the updating on environment information and allow new classes to come when the model is pretty sure.
 
 
 
