@@ -1,0 +1,158 @@
+\usepackage{times}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{lipsum} 
+\usepackage{hhline}
+\usepackage{color}
+%\usepackage[table]{xcolor}
+
+\usepackage[amssymb]{SIunits}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{comment}
+\usepackage{import}
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{amsfonts}
+\usepackage[format=plain,indention=0cm, font=small, labelfont=bf]{caption}
+\usepackage{fancyhdr}
+%\usepackage[pdftex]{graphicx}
+\usepackage[pdftex,
+	    colorlinks, 	
+	    pdfstartview=FitH,
+	    linkcolor=black,
+	    citecolor=black,
+	    urlcolor=black,
+	    filecolor=black
+	    ]{hyperref}
+\usepackage{lscape}
+\usepackage[T1]{fontenc}
+\usepackage{floatrow}
+\usepackage{enumerate}
+\usepackage{pifont}
+\usepackage{soul}
+\usepackage{esvect}
+\usepackage{enumitem}
+
+%\usepackage[dvipsnames]{xcolor}
+
+
+\usepackage{floatflt}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\newcolumntype{Y}{ >{\RaggedRight\arraybackslash}X}
+\newcommand\T{\rule{0pt}{2.6ex}}      
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}}
+\RequirePackage{color}
+\definecolor{RED}{rgb}{1,0,0}
+\definecolor{BLUE}{rgb}{0,0,1}
+\definecolor{White}{rgb}{1,1,1}
+\newtheorem{theorem}{Theorem}
+
+%\newcommand{\idx}{CECI}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+%\newtheorem{rule}{Rule}
+%\newtheorem{lem}{Lemma}
+
+
+
+
+
+\newcommand{\sub}{CECI}
+\newcommand{\idx}{CECI}
+%\newtheorem{example}{Example}
+%\newtheorem{lem}{Example}
+\newcommand{\simd}{SIMD-X}
+
+\theoremstyle{expln}
+\newtheoremstyle{expln}% <name>
+{5pt}% <Space above>
+{5pt}% <Space below>
+{}% <Body font>
+{}% <Indent amount>
+{\itshape}% <Theorem head font>
+{:}% <Punctuation after theorem head>
+{}% <Space after theorem headi>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+% DOI
+%\acmDOI{10.475/123_4}
+\newtheorem{expln}{Explain}
+
+
+%\theoremstyle{rul}
+\newtheoremstyle{mystyle}% <name>
+{.05in}% <Space above>
+{0in}% <Space below>
+{\itshape}% <Body font>
+{}% <Indent amount>
+{\bfseries}% <Theorem head font>
+{: }% <Punctuation after theorem head>
+{0in}% <Space after theorem headi>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+% DOI
+%\acmDOI{10.475/123_4}
+\theoremstyle{mystyle}
+\newtheorem{rul}{Rule}
+
+\newtheoremstyle{taskstyle}% <name>
+{.05in}% <Space above>
+{0in}% <Space below>
+{}% <Body font>
+{}% <Indent amount>
+{\bfseries}% <Theorem head font>
+{.}% <Punctuation after theorem head>
+{.1in}% <Space after theorem headi>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+% DOI
+%\acmDOI{10.475/123_4}
+\theoremstyle{taskstyle}
+\newtheorem{tstyle}{Research Task}
+
+
+\definecolor{unitednationsblue}{rgb}{0.36, 0.57, 0.9}
+\definecolor{pinkorange}{rgb}{1.0, 0.6, 0.4}
+\definecolor{darkseagreen}{rgb}{0.56, 0.74, 0.56}
+
+
+%\newtheoremstyle{examp}% <name>
+%{5pt}% <Space above>
+%{5pt}% <Space below>
+%{\itshape}% <Body font>
+%{}% <Indent amount>
+%{\itshape}% <Theorem head font>
+%{:}% <Punctuation after theorem head>
+%{.5em}% <Space after theorem headi>
+%{}% <Theorem head spec (can be left empty, meaning `normal')>
+% DOI
+%\acmDOI{10.475/123_4}
+%\theoremstyle{examp}
+%\newtheorem{examp}{Example}
+%\newcommand{\td}{{}}
+\newcommand{\td}{{\bf\color{red} FIXME~}}
+\providecommand{\TODO}[1]{{\protect\color{red}\noindent {\bf [TODO]}\emph{#1} {\bf [/TODO]}}}
+\providecommand{\todo}[1]{{\protect\color{red}\noindent {\bf [TODO]}\emph{#1} {\bf [/TODO]}}}
+\providecommand{\add}[1]{{\protect\color{red} #1 (ADD) }}
+\providecommand{\ADD}[1]{{\protect\color{red} #1 (ADD) }}
+\providecommand{\CHECK}[1]{{\protect\color{red} #1 (check) }}
+\providecommand{\check}[1]{{\protect\color{red} #1 (check) }}
+\providecommand{\DummyText}[1]{{\protect\color{white} #1}}
+%\renewcommand{\refname}{References Cited}
+\newcommand{\degrees}{$\!\!$\char23$\!$}
+\def\rrr#1\\{\par
+\medskip\hbox{\vbox{\parindent=2em\hsize=6.12in
+\hangindent=4em\hangafter=1#1}}}
+\def\baselinestretch{1}
+
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+
+%\titlespacing\section{0pt}{1pt plus 0pt minus 2pt}{0pt plus 0pt minus 2pt}
+\titlespacing\subsection{0pt}{8pt plus 4pt minus 2pt}{8pt plus 4pt minus 2pt}
+%\titlespacing\subsubsection{0pt}{1pt plus 0pt minus 2pt}{0pt plus 0pt minus 2pt}
+
+\newcommand\encircle[1]{%
+	\tikz[baseline=(X.base)] 
+	\node (X) [draw, shape=circle, inner sep=0, fill=black, text=white] {\strut #1};}
