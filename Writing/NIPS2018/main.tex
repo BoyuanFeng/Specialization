@@ -99,12 +99,15 @@ In short, our contribution are three folds.
 \end{itemize}
 
 \section{Related Works}
+% Talk about scenario
+Many papers have talked about the difference between testing CNN models in lab setting and in the wild. In lab setting, the prevalent benchmarks, like ImageNet \cite{deng2009imagenet} and CIFAR100 \cite{krizhevsky2009learning}, all assumes equal number of images for each class. However, in a more realistic setting \cite{han2016mcdnn, shen2017fast}, different class may have dramatically different frequency and the distribution may also change over time. The question we want to answer is that, given an environment with a number of classes and distribution, how to use this information? All of the existing works \cite{han2016mcdnn, shen2017fast} only use transfer learning to retrain the last few layers, which would introduce huge amount of energy-consumption and time latency. Our method will make use of the distribution efficiently without retraining, thus avoid additional energy-consumption and time latency.
+
+% Unbalanced dataset
+Unbalanced dataset focus on the problem that training dataset has different distribution with the testing dataset, which is related to our scenario. One key point of unbalanced dataset is that the minor classes in the training dataset cannot gain same attention as the major classes, thus oversampling on minor classes or undersampling on major classes will be implemented to generate a balanced dataset \cite{wang2016dealing}. Our scenario is different since we assume that we have a model pretrained on balanced dataset and in the testing time the class distribution changes. Another key point of unbalanced dataset is that in the running time, as the distribution changes, the model will keep updating as new inputs come and retraining is constantly needed. Our method avoid retrain at all and could achieve the same or better performance by only changing a few parameters according to the distribution automatically. Thus energy efficiency and speedup could be achieved by our solution.
 
 
-
-\section{Problems in Automatical Transfer Learning}
-
-
+% Talk about transfer learning
+Transfer learning has shown benefit in domain adaption and currently is the dominant method, if not the only one, for domain adaption. To solve the problem that the testing dataset is small, we use transfer learning \cite{oquab2014learning}. To use unsupervised dataset \cite{doersch2015unsupervised, noroozi2016unsupervised}, we use transfer learning. Assume we have a large model handling $1000$ classes and in an environment only $10$ classes appearing, we still use transfer learning \cite{han2016mcdnn, shen2017fast}. Transfer learning has become the only method off the top of head when we consider the change in classes. Although transfer learning shows various benefit, it also has intrinsic shortage residing in the process of training a CNN model. First, it is hard to decide how many layers we should freeze. \cite{yosinski2014transferable} reported that the freezing less layers leads to better performance on different domains and freezing more layers lead to a better performance on similar domains since the co-adapted interactions between layers will be kept. However, it is still hard to decide whether two domains are similar enough and the exact effect of freezing various number of layers. Second, it is hard to decide the hyper-parameters unless actually try different settings. For epoch number, it is hard to predict whether the model will converge or collapse after a fixed number of epochs. The choice of learning rate also depends on both model and dataset. The choice of hyper-parameter need expertise in lab to fine-tune, which is not convenient in a automatical product. Third, the long latency and energy consuming of training a model obstacle the transfer learning on energy-efficient devices, especially in an environment that class number and distributions keep changing. Our method can avoid retraining at all while utilizing the new dataset, thus all the inconvenience related to retraining is avoided naturally.
 
 
 \section{Probability Layer}
@@ -184,7 +187,7 @@ Although probability layer boost the top-1 accuracy of complex model a lot, shal
 
 
 
-{\color{blue}
+
 \section{Analysis on Logits}
 % First paragraph: Discuss the intuition behind the probability layer and why it sometimes works and sometimes not. Introduce the importance of logits and give a summary
 The intuition of probability layer is rescaling and logits plays a pivotal role in this process. Rescaling means that the classes which has been observed frequently in an environment tends to be selected as the true label. For example, if the original model is trained on CIFAR100, then $P_t(i)$ for any class $i$ is $1\%$. Assuming in the testing dataset, first $10$ classes contain $1000$ images together and the other $90$ classes contain $5$ images individually. In this dataset, $P(i)$ for each of the $10$ major classes is $6.9$\% and $P(i)$ is $0.3$\%. Following equation \eqref{eqn:rescaling}, if the class $i$ accounts for $P_t(i)$ in training dataset and $P(i)$ in the testing dataset, the predicted probability from original model will be rescaled by multiplying $P(i)/P_t(i)$. Thus, the predicted probability of first $10$ classes will be rescaled to be $6.9 \cdot P_t(i|X)$ and the value for the other $90$ classes will be $0.3 \cdot P_t(i|X)$. In other words, if there is no strong sign that one image belongs to the other $90$ classes, the model with probability layer will choose the predicted label from first $10$ classes. For models with precise logits, i.e. high top-5 accuracy, this knowledge would be very helpful. However, for a model with imprecise logits, this knowledge does not help a lot, since the true label usually does not have the highest logits even within the first $10$ classes. Thus logits plays a pivotal role in the success of probability layer and the importance of logits has not been found in existing papers \cite{saerens2002adjusting} from statistics, since number of classes is limited to be $2$. Although less number of classes tends to have a more precise logits, it is unrealistic to require so, since hundreds or even thousands of classes are common in dataset in current practice, which would become intrinsic obstacle for implementing probability layer on some models. Fortunately, the precise of logits also depends on models. Deeper models tends to give more precise logits. We will present the logits of various models to show so and provide a metric on this precision. Finnaly, we will give an updated version of probability layer based on the analysis on logits.
@@ -298,7 +301,7 @@ where $\omega$ is the threshold and we can treat $\omega$ as a hyper-parameter a
 
 
 
-}
+
 
 
 
