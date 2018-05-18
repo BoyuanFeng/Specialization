@@ -10,12 +10,17 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{graphicx}
-\usepackage{caption}
+\usepackage[tableposition=top]{caption}
 \usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{xcolor}
 
-\title{Formatting instructions for NIPS 2018}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+
+
+\title{ProbabilityCNN: Environment Adaptive Model Without Finetuning}
 
 % The \author macro works with any number of authors. There are two
 % commands used to separate the names and addresses of multiple
@@ -65,7 +70,7 @@
 
 
 \begin{abstract}
-  We can meet thousands of objects through years, i.e., different kind of animals, plants, and various people, which requires a general model classifying all these object. On the other hand, in a specific environment, like our home or office, only less than ten objects appear, such as family members, pets, and furniture. Thus a special model recognizing a few objects could be sufficient. Using a special model in these environment could lead automatically to a much higher accuracy since there is a reduction in number of classes. However, using special models has a intrinsic problem that there are so many environment and mind-bogglingly many combinations of objects, which makes it infeasible to train special models one-by-one. In the contrast, the general model could be trained once and used everywhere. General model also has another benefit that it has seen much more images than a special model and a special model derived from the general model could have much higher accuracy than the one trained from scratch. The problem is, given various combination of classes and distribution, could we train a general model and \textit{derive specialized models from it efficiently for all combinations?} The intuitive idea would be transfer learning, in which the last few layers of the general model will be retrained for the specialized dataset. However, considering the time latency and energy consuming of retraining a model, we argue that avoiding retraining is critical in the efficient derivation of specialied models. Instead, we brought up \textit{probability layer}, which could adapt the general model to all combinations of classes and distribution efficiently without any retraining. Through experiments, it was shown that probability layer without retraining could perform equivalent or even better than transfer learning with retraining.
+  We can meet thousands of objects through years, i.e., different kind of animals, plants, and various people, which requires a general model to classify all these objects. On the other hand, in a specific environment, like our home or office, only less than ten objects appear, such as family members, pets, and furniture. Thus a special model recognizing a few objects could be sufficient. Using a special model in these environment could lead automatically to a much higher accuracy since there is a reduction in number of classes. However, using special models has a intrinsic problem that there are so many environment and mind-bogglingly many combinations of objects, which makes it infeasible to train special models one-by-one. In the contrast, the general model could be trained once and used everywhere. General model also has another benefit that it has seen much more images than a special model and a special model derived from the general model could have much higher accuracy than the one trained from scratch. The problem is, given various combination of classes and distribution, could we train a general model and \textit{derive specialized models from it efficiently for all combinations?} The intuitive idea would be transfer learning, in which the the general model is fintuned to adapt for new dataset. However, considering the time latency and energy consumption of finetuning a model, we argue that avoiding fintuning is critical in the efficient derivation of specialied models. Instead, we brought up \textit{probability layer}, which could adapt the general model to all combinations of classes and distribution efficiently without any retraining. Through experiments, it was shown that probability layer without retraining could perform equivalent or even better than transfer learning with retraining.
 \end{abstract}
 
 
@@ -164,19 +169,14 @@ I_X(x) = \begin{cases}
 0, &\text{$o.w.$}
 \end{cases}
 \end{equation}
-. If a model have a strong confidence in its prediction, the accuracy would be much higher than the model's average accuracy. Fig. \ref{fig:threshold} shows that accuracy on denseNet for images with predicted probability higher than various threshold. While the original denseNet has top-1 accuracy as $73\%$, the accuracy increase to $83\%$ when we set the threshold $\omega$ to be $75\%$. When we increase furtherly the threshold $\omega$ to be $99\%$, the accuracy would increase to $95.01\%$. Thus when a model has strong confidence in its prediction, we should better believe in the model instead of rescaling. The bar plot in Fig. \ref{fig:threshold} also shows that lots of images can get high predicted probability from original model. For example, in denseNet, there are more than 60\% images get predicted probability higher than 95\%. Thus most of the images from minor classes could be classified correctly. 
-
-\begin{figure}
-\centering
-\includegraphics[scale = 0.6]{threshold.png}
-\caption{Probability Layer Intuition}
-\label{fig:threshold}
-\end{figure}
+. If a model have a strong confidence in its prediction, the accuracy would be much higher than the model's average accuracy. Our experiments show that CNNs will give most of the images high predicted probability and the accuracy of these images will exceed average accuracy a lot. Probability layer helps when the original model is confused on the prediction and will not interfere the decision when the original model has confidence in its prediction.
 
 
 
 
-\begin{figure}
+
+
+\begin{figure}[t]
 \begin{subfigure}{.25\textwidth}
   \centering
   \includegraphics[width=\textwidth]{rocket.png}
@@ -208,67 +208,128 @@ Fig. \ref{fig:intuition} gives intuition on how probability layer utilize enviro
 %how to select general model?
 
 
-% compare probability layer with naive mask
-
 \section{Experiments}
-To show their potential, we evaluate PCNN on three tasks. First, with fixed distribution, we compare the performance of probability layer with transfer learning. Second, for data stream with minor classes, we compare the performance of probability layer with transfer learning. Third, we show that probability layer is complementary to acceleration methods through combining probability layer with spatial redundancy elimination approach \cite{figurnov2016perforatedcnns} to achieve decreased computation and improved accuracy.
+%We use three convolutional neural networks of increasing size and computational complexity: AlexNet \cite{krizhevsky2012imagenet}, ResNet \cite{he2016deep}, and DenseNet \cite{huang2017densely}. We reimplement these three networks on Tensorflow and train the model on CIFAR100 \cite{krizhevsky2009learning} from scratch. The statistics for the original model is shown in Table xxx. In all networks, we attempt to add probability layer after the softmax layer. 
 
-\subsection{Probability layer with fixed distribution}
+We implemented probability layer on DenseNet \cite{huang2017densely} and evaluated the PCNN on specialized dataset with various number of classes and class distribution. We choose DenseNet as the base model since it is the state-of-the-art and has similar results with other state-of-the-art models, i.e., GoogLeNet \cite{szegedy2015going} and ResNet \cite{he2016deep}. We reimplemented the DenseNet on Tensorflow \cite{abadi2016tensorflow} and trained the model on CIFAR100 \cite{krizhevsky2009learning} from scratch. The \textit{specialized dataset} is generated from CIFAR100 \cite{krizhevsky2009learning}, which originally has $100$ classes with equal weight. 
+
+\textbf{Transfer Learning.} Following the published practice \cite{doersch2015unsupervised, han2016mcdnn, oquab2014learning, shen2017fast, yosinski2014transferable}, all fully-connected layers after convolutional layers are finetuned on generated dataset with same class distribution as the testing dataset. To eliminate the effect of epoch, we used three different epochs, i.e., $1$, $5$, and $30$. The maximum epoch is $30$ because latency and energy efficiency are considered.
+
+To show the potential of PCNN, we evaluate probability layer on specialized datasets composed with various number of classes and class distributions. We begin our experiments by showing that different class combinations have significant influence over the accuracy and probability layer can bring in benefit and perform better than transfer learning on all class combinations. Then we show that probability layer can improve accuracy for any number of classes and make use of unbalanced distribution. We proceed to show that most of the images will have predicted probability higher than $75\%$ and the accuracy among these high-confidence images is $84\%$. Finally, we demonstrate that probability layer is complementary to acceleration methods through combining probability layer with spatial redundancy elimination approach \cite{figurnov2016perforatedcnns} to achieve decreased computation and improved accuracy.
+
+\subsection{Class effect}
+We explore the effect of class combinations and compare the performance of probability layer and transfer learning on various class combinations. Fixing number of classes as two, we randomly selected five class combinations and compare the original model, model after transfer learning, and the model with probability layer, see fig. \ref{fig:classEffectExamples}. We see that with the same model, different class combinations may have drmatically different accuracy. While the original model can achieve a accuracy as 83\% for classifying chair and cup, the accuracy for beaver and bear is only 52.5\%. We can also observe that both transfer learning and probability layer can bring in benefit no matter which two classes compose the dataset while probability layer generally performs better than transfer learning. In the randomly selected five class combinations, probability layer can provide an additional benefit of $2.16\%$ on average. Note that for fox and pine, transfer learning provides a slightly better accuracy than probability layer. We believe that this is due to randomness, especially when considering that transfer learning performs better on all other class combinations. 
+
+Fig. \ref{fig:classEffectSummary} gives a summary over performance of all three models on specialized dataset with two and five classes. The figure shows the result from $100$ randomly selected class combinations. We see that, on the original model, while the average accuracy for classifying two classes is $70\%$, the minimum accuracy could be $45\%$ and the maximum accuracy can reach $83\%$, which shows that the accuracy of classifying two classes could change dramatically even using the same model. This observation also holds for transfer learning and probability layer. We can also note that the average accuracy of probability layer is much higher than transfer learning. 
+
+\begin{figure}[t]
+    \begin{subfigure}[b]{0.47\textwidth}
+        %\centering
+        \includegraphics[width=\textwidth]{classEffectLine.png}
+        \caption{Concrete examples}
+        \label{fig:classEffectExamples}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.47\textwidth}
+        %\centering
+        \includegraphics[width=\textwidth]{classEffect.png}
+        \caption{Summary of class effect}
+        \label{fig:classEffectSummary}
+    \end{subfigure}
+    \caption{Class effect on the original model, the model after finetuning, and the model with probability layer.} \label{fig:classEffect}
+\end{figure}
+
+\subsection{Results on specialized datasets with only majority classes}
 % Third paragraph: Experiment setting
-We evaluate probability layer's ability in making use of environment on number of classes as well as in-class distribution when number of classes is fixed. The dataset is a subset of CIFAR100 \cite{krizhevsky2009learning}. CIFAR100 \cite{krizhevsky2009learning} is a dataset containing 100 classes with $50,000$ images in training dataset and $10,000$ images in testing dataset. We trained denseNet \cite{huang2017densely} on original CIFAR100 training datasets. For testing part, to evaluate the performance of probability layer under various conditions, we choose a subset of testing images as the new testing dataset. For various number of classes, we select a subset of classes and each class has equal number of images. For testing the ability to adapt to a dataset with a few major classes and many minor classes, we choose $10$ classes as the major class, select all $100$ testing images for each class, and randomly choose a fixed number of testing images in other $90$ classes, according to the desired percentage that $10$ major classes occupy. For implementing probability layer, we calculate the percentage of every class in the generated testing dataset and set up the parameters in probability layer correspondingly. When implementing transfer learning, we use the same model trained on CIFAR100 and retrain on the same generated training dataset. For the retraining process, we retrain all fully-connected layers after convolutional layers, since this is the method reported to have best accuracy gain (CITATIONS). In the retraining process, various epoches were used, i.e. $1$, $5$, $30$. The maximum epoch tried is $30$ because we consider both latency and energy which could be used in normal operation instead of retraining. For example, if the generated training dataset has 10 classes and 500 images in each class, retraining for $30$ epochs means that $150,000$ images will be processed by the models. Since generally the image will be processed every one second, the machine can proceed around $41$ more hours without so many retraining.
+We explore probability layer's ability on making use of environment when there are only a few majority classes. For each number of classes, we randomly sampled $100$ subsets of classes and present the average accuracy in fig. \ref{fig:PLvsRetrain}. We see that significant benefit has been achieved by probability layer for all number of classes. When there are 5 classes, an increase more than $20\%$ can be achieved without any finetuning. Another point worth noting is that the benefit diminishes gradually as the number of classes increases. Even if there are $40$ classes, a benefit over $10\%$ could still been observed. This shows significant advantage over previously published results \cite{shen2017fast}, in which no benefit exists when there are more than $15$ classes.
+ 
+We compare our results with transfer learning in fig. \ref{fig:PLvsRetrain}. For every specialized dataset, we finetune the model for $5$ rounds on a training dataset with the same class combinations and class distribution as the testing dataset. For all selected class numbers, probability layer performs better than transfer learning. This advantage of probability layer over transfer learning increases as the number of classes increase. We contribute this phenonmenon to the fact that PCNN has seen more images than transfer learning. Existing papers \cite{yosinski2014transferable} has also reported that transfer learning may destroy the co-adaption between layers and deteriorate the performance on prediction. Another point worth noting is that when the number of classes increases over $90$, retraining would bring worse accuracy than original model without retraining. In contrast, the probability layer can still bring 2\% advantage over original model. We believe the reanson is that the deterioration of co-adaption between layers leads to a decrease in accuracy and the reduction in number of classes cannot make up this deterioration when number of classes is $90$, which is almost same as the original class numbers. Probability layer does not need finetuning and thus avoid this problem. All these observations indicate that probability layer has better ability in using various environment.
 
-% Forth paragraph: Show probability layer works on complex models
-Fig. \ref{fig:complexNumber} shows the comparison between probability layer and transfer learning on various number of classes. Original model represents the model with neither probability layer nor transfer learning, i.e. without adaption to the new dataset. We can find that the model with probability layer performs consistently better than the model without probability layer. When number of classes is less than $10$, probability layer can boost the top-1 accuracy to be more than 95\%, which is better than the human's ability in recognition, reported to be a top-5 error of 5.1\% \cite{russakovsky2015imagenet}. When number of classes is less than 10, probability layer's performance is at most 2\% lower than retraining for $5$ rounds. As number of classes becomes larger than $10$, probability layer would always perform better than retraining for $5$ rounds. The advantage of probability layer over retraining increases as number of classes increases. One point worth noting is that when the number of classes increases over $90$, retraining would bring worse accuracy than original model without retraining. In contrast, the probability layer can still bring 2\% advantage over original model. All these observations indicate that probability layer has better ability in using various environment, especially when the number of classes gets larger.
 
-Fig. \ref{fig:complexNumber} shows the accuracy on testing data when there are $10$ major classes occupying various weights among $100$ classes. The other $90$ classes are minor classes with same weights. While the weights increase from $50$\% to $100$\%, probability layer performs consistently better than the retraining for $5$ or $1$ rounds. Even if we retrain the model for $30$ rounds, probability layer still performs better when weights of $10$ major classes is less than $85$\%. When the weights increase over $85$\%, the advantage of retraining for $30$ rounds over probability layer is at most $0.5$\%. Retraining for $30$ rounds takes $60$ seconds and xxx GFLOPS. Considering the intensive energy-consumption and time latency of retraining for $30$ rounds, this benefit of $0.5$\% advantage is not so significant. We should also note that retraining for $30$ rounds would make the accuracy to be much lower than original model when weights of major classes is less than 75\%. Since we need to choose a method before we start in automatically using environment information, we can conclude that probability layer is the most suitable method.
+\subsection{High confidence, high accuracy}
+We justify our design of threshold in probability layer by exhibiting the percentage of images with predicted probability layer higher than various threshold and the accuracy of these images, see fig. \ref{fig:threshold}. While the original denseNet has top-1 accuracy as $73\%$, the accuracy increase to $83\%$ when we set the threshold $\omega$ to be $75\%$. When we increase furtherly the threshold $\omega$ to be $99\%$, the accuracy would increase to $95.01\%$. Thus when a model has strong confidence in its prediction, we should better believe in the model instead of rescaling. 
 
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
+We also note that a large portion of images can get high predicted probability from original model. For instance, there are more than 60\% images get predicted probability higher than 95\%. For these images that the original model has strong confidence in its prediction, the probability layer will not interfere the decision. The probability layer will step in when the original model is not sure and give suggestion to the probability layer according to the environment information. 
+
+
+\begin{figure}[!tbp]
+\RawFloats
+
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{PLvsRetrain.png}
-        \caption{Various number of classes}
-        \label{fig:complexNumber}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-      %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.49\textwidth}
+        \caption{Performance on different number of classes}
+        \label{fig:PLvsRetrain}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{VaryingDistribution.png}
-        \caption{Ten classes occupying various percentage}
-        \label{fig:complexDistribution}
-    \end{subfigure}
-    \caption{Probability layer on denseNet}\label{fig:complex}
+        \includegraphics[width=\textwidth]{threshold.png}
+        \caption{Threshold}
+        \label{fig:threshold}
+  \end{minipage}
 \end{figure}
 
 
-% Fifth paragraph: probability layer can boost accuracy to top-5 accuracy. TODO
 
-\subsection{Probability layer with varied distribution}
 
+\subsection{Results on specialized datasets with both majority and minority classes}
+
+We evaluate the probability layer on noisy environment, in which a few major classes occupies most of the images while a huge number of minority classes also appear. Fig. \ref{fig:variousDistribution5} and fig. \ref{fig:variousDistribution10} shows the results when the numbers of majority classes are five and ten respectively. While the weight of majority classes increases from $50$\% to $100$\%, probability layer performs consistently better than the transfer learning for $5$ or $1$ rounds. Even if we fintune the model for $30$ rounds, probability layer still performs better when weights of major classes is relatively small. When the weights increase further, the advantage of finetuning for $30$ rounds is at most $0.5$\%. Considering the intensive energy-consumption and time latency of retraining for $30$ rounds, this benefit of $0.5$\% advantage is not so significant, especially on devices which requires real time response and has strict energy budget. We should also note that retraining for $1$ rounds would make the accuracy to be much lower than original model when weights of major classes is less than 75\%. Since we need to choose a method before we start in automatically using environment information, we can conclude that probability layer is the most suitable method.
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{variousPercentage5.png}
+        \caption{Five classes with various distribution}
+        \label{fig:variousDistribution5}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{variousPercentage10.png}
+        \caption{Ten classes with various distribution}
+        \label{fig:variousDistribution10}
+    \end{subfigure}
+
+    \caption{Probability layer on denseNet}\label{fig:complex}
+\end{figure}
 
 
 \subsection{Combining acceleration methods}
 A promising way to achieve high speedup and accuracy is to combine acceleration methods with probability layer. For this to succeed, the acceleration methods should utilize different types of redundancy in the network. In this section, we verify that probability layer can be combined with a acceleration methods of using spatial redundancy, \textit{PerforatedCNN} \cite{figurnov2016perforatedcnns}, to achieve high speed up while increasing top-1 accuracy.
 
-We reimplemented the PerforatedCNN \cite{figurnov2016perforatedcnns} on denseNet. PerforatedCNN makes use of spatial redundancy in image by skipping evaluation in some of the spatial positions. Different from other methods in using spatial redundancy, i.e., increasing strides, PerforatedCNN will interpolate these skipped positions using nearest neighborhood, such that the output size will be unchanged. In this way, the architecture remains same and no retraining is needed. The shortage of PerforatedCNN is a huge decrease in accuracy, which could be made up by probability layer.
+We reimplemented the PerforatedCNN \cite{figurnov2016perforatedcnns} on denseNet. PerforatedCNN makes use of spatial redundancy in image by skipping evaluation in some of the spatial positions. Different from other methods in using spatial redundancy, i.e., increasing strides, PerforatedCNN will interpolate these skipped positions using nearest neighborhood, such that the output size will be unchanged. In this way, the architecture remains same and no finetuning is needed. The shortage of PerforatedCNN is that it may introduce a huge decrease in accuracy. Our experiments show that this drawback of PerforatedCNN could be made up by probability layer. Thus combining probability layer with other acceleration methods can both decrease computation and increase accuracy.
 
-We first apply the probability layer to the network. Then we apply the spatial redundancy elimination methods to this network. In the whole process, no retraining is needed. The PerforatedCNN is tested at the theoretical speedup level of 2x. The testing dataset contains $5$ classes with equal frequency. The results are presented in the table xx. The PerforatedCNN decreases computation and accuracy while probability layer increase accuracy and has no contribution towards decreasing computation. Probability layer complements spatial redundancy elimination methods perfectly and the combined method achieves both increase in accurarcy and decrease in computation.
+We first apply the probability layer to the network. Then we apply the spatial redundancy elimination methods to this network. In the whole process, no finetuning is needed. The PerforatedCNN is tested at the theoretical speedup level of 2x. The testing dataset contains $5$ randomly selected classes with equal frequency. The results are presented in the table \ref{tab:my_label}. Due to class effect, the original model will give a top-1 accuracy of $67.9\%$, which is slightly lower than the average accuracy of DenseNet on CIFAR100. With the probability layer, the model without finetuning can increase the top-1 accuracy dramatically to be $98.4\%$. The PerforatedCNN will give top-1 accuracy of $48.19\%$ if we choose the theoretical speedup level of 2x, which is similar to the results reported in PerforatedCNN \cite{figurnov2016perforatedcnns}. Adding the proposed method, the PerforatedCNN can give a top-1 accuracy of $92.20\%$ while decreasing computation by half, which shows that probability layer complements spatial redundancy elimination methods perfectly and provides a promising perspective of combining probability layer with other acceleration methods.
 
-\begin{center}
-\begin{tabular}{ c|c|c } 
- Method & Mult. $\downarrow$ & Accuracy $\uparrow$ (\%) \\ 
- \hline
- Probability Layer & 1.0x & 21\% \\ 
- Perforation & 2.0x & \\ 
- \hline
- Combined Method & - & -
-\end{tabular}
-\end{center}
+%Considering that the accuracy of previously published acceleration methods always decrease the accuracy, this combined method shows great potential and 
+
+
+
+\begin{table}[h]
+    \caption{Summary}
+    \label{tab:my_label}
+
+    \centering
+    \begin{tabular}{ ccc } 
+     Method & Mult. $\downarrow$ & Top-1 Accuracy \\ 
+     \hline
+     Original Model & 1.0x & 67.79\% \\
+     Probability Layer & 1.0x & 98.4\% \\ 
+     Perforation & 2.0x & 48.19\% \\ 
+     \hline
+     Combined Method & 2.0x & 92.20\%
+    \end{tabular}
+\end{table}
+
+
 
 
 \section{Conclusion}
-Transfer learning has numerous intrinsic problems for using environment automatically. When the target classes does not change, probability layer is the alternative way to use environment without retraining and shows comparable or even better performance than transfer learning. Through analysis on logits, a metric is given such that, without actually running, we can decide whether probability layer can bring benefit to a model. Further, probability layer will not obstacle the updating on environment information and allow new classes to come when the model is pretty sure.
+We have presented probability layer which exploit runtime environment information to increase prediction accuracy. Probability layer requires only a single extra layer after the general CNN models with unnoticable extra computation and obtains a boost in accuracy. Compared to transfer learning, probability layer achieves comparable or even better accuracy boost, avoids retraining, and maintain the ability to detect new classes. Additionally, probability layer can be combined with acceleration methods which exploit various types of network redundancy to achieve further speedups.
+
+
 
 
 
