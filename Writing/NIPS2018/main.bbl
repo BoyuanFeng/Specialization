@@ -1,0 +1,144 @@
+\begin{thebibliography}{10}
+
+\bibitem{abadi2016tensorflow}
+Mart{\'\i}n Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey
+  Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et~al.
+\newblock Tensorflow: A system for large-scale machine learning.
+\newblock In {\em OSDI}, volume~16, pages 265--283, 2016.
+
+\bibitem{bergstra2012random}
+James Bergstra and Yoshua Bengio.
+\newblock Random search for hyper-parameter optimization.
+\newblock {\em Journal of Machine Learning Research}, 13(Feb):281--305, 2012.
+
+\bibitem{deng2009imagenet}
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li~Fei-Fei.
+\newblock Imagenet: A large-scale hierarchical image database.
+\newblock In {\em Computer Vision and Pattern Recognition, 2009. CVPR 2009.
+  IEEE Conference on}, pages 248--255. IEEE, 2009.
+
+\bibitem{doersch2015unsupervised}
+Carl Doersch, Abhinav Gupta, and Alexei~A Efros.
+\newblock Unsupervised visual representation learning by context prediction.
+\newblock In {\em Proceedings of the IEEE International Conference on Computer
+  Vision}, pages 1422--1430, 2015.
+
+\bibitem{figurnov2016perforatedcnns}
+Mikhail Figurnov, Aizhan Ibraimova, Dmitry~P Vetrov, and Pushmeet Kohli.
+\newblock Perforatedcnns: Acceleration through elimination of redundant
+  convolutions.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  947--955, 2016.
+
+\bibitem{glorot2010understanding}
+Xavier Glorot and Yoshua Bengio.
+\newblock Understanding the difficulty of training deep feedforward neural
+  networks.
+\newblock In {\em Proceedings of the thirteenth international conference on
+  artificial intelligence and statistics}, pages 249--256, 2010.
+
+\bibitem{han2016mcdnn}
+Seungyeop Han, Haichen Shen, Matthai Philipose, Sharad Agarwal, Alec Wolman,
+  and Arvind Krishnamurthy.
+\newblock Mcdnn: An approximation-based execution framework for deep stream
+  processing under resource constraints.
+\newblock In {\em Proceedings of the 14th Annual International Conference on
+  Mobile Systems, Applications, and Services}, pages 123--136. ACM, 2016.
+
+\bibitem{he2015delving}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Delving deep into rectifiers: Surpassing human-level performance on
+  imagenet classification.
+\newblock In {\em Proceedings of the IEEE international conference on computer
+  vision}, pages 1026--1034, 2015.
+
+\bibitem{he2016deep}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 770--778, 2016.
+
+\bibitem{huang2017densely}
+Gao Huang, Zhuang Liu, Kilian~Q Weinberger, and Laurens van~der Maaten.
+\newblock Densely connected convolutional networks.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, volume~1, page~3, 2017.
+
+\bibitem{krizhevsky2009learning}
+A~Krizhevsky and G~Hinton.
+\newblock Learning multiple layers of features from tiny images.
+\newblock {\em Technical report, University of Toronto}, 1, 01 2009.
+
+\bibitem{krizhevsky2012imagenet}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1097--1105, 2012.
+
+\bibitem{noroozi2016unsupervised}
+Mehdi Noroozi and Paolo Favaro.
+\newblock Unsupervised learning of visual representations by solving jigsaw
+  puzzles.
+\newblock In {\em European Conference on Computer Vision}, pages 69--84.
+  Springer, 2016.
+
+\bibitem{oquab2014learning}
+Maxime Oquab, Leon Bottou, Ivan Laptev, and Josef Sivic.
+\newblock Learning and transferring mid-level image representations using
+  convolutional neural networks.
+\newblock In {\em Computer Vision and Pattern Recognition (CVPR), 2014 IEEE
+  Conference on}, pages 1717--1724. IEEE, 2014.
+
+\bibitem{russakovsky2015imagenet}
+Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma,
+  Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, et~al.
+\newblock Imagenet large scale visual recognition challenge.
+\newblock {\em International Journal of Computer Vision}, 115(3):211--252,
+  2015.
+
+\bibitem{saerens2002adjusting}
+Marco Saerens, Patrice Latinne, and Christine Decaestecker.
+\newblock Adjusting the outputs of a classifier to new a priori probabilities:
+  a simple procedure.
+\newblock {\em Neural computation}, 14(1):21--41, 2002.
+
+\bibitem{shen2017fast}
+Haichen Shen, Seungyeop Han, Matthai Philipose, and Arvind Krishnamurthy.
+\newblock Fast video classification via adaptive cascading of deep models.
+\newblock {\em arXiv preprint}, 2017.
+
+\bibitem{simonyan2014very}
+Karen Simonyan and Andrew Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em arXiv preprint arXiv:1409.1556}, 2014.
+
+\bibitem{smith2017don}
+Samuel~L Smith, Pieter-Jan Kindermans, and Quoc~V Le.
+\newblock Don't decay the learning rate, increase the batch size.
+\newblock {\em arXiv preprint arXiv:1711.00489}, 2017.
+
+\bibitem{szegedy2015going}
+Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir
+  Anguelov, Dumitru Erhan, Vincent Vanhoucke, Andrew Rabinovich, et~al.
+\newblock Going deeper with convolutions.
+\newblock In {\em The IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}. Cvpr, 2015.
+
+\bibitem{wang2016dealing}
+Shuo Wang, Leandro~L Minku, and Xin Yao.
+\newblock Dealing with multiple classes in online class imbalance learning.
+\newblock In {\em IJCAI}, pages 2118--2124, 2016.
+
+\bibitem{wilson2003general}
+D~Randall Wilson and Tony~R Martinez.
+\newblock The general inefficiency of batch training for gradient descent
+  learning.
+\newblock {\em Neural Networks}, 16(10):1429--1451, 2003.
+
+\bibitem{yosinski2014transferable}
+Jason Yosinski, Jeff Clune, Yoshua Bengio, and Hod Lipson.
+\newblock How transferable are features in deep neural networks?
+\newblock In {\em Advances in neural information processing systems}, pages
+  3320--3328, 2014.
+
+\end{thebibliography}

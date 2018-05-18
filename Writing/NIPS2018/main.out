@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Works}{}% 2
+\BOOKMARK [1][-]{section.3}{Probability Layer}{}% 3
+\BOOKMARK [1][-]{section.4}{Experiments}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Class effect}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Results on specialized datasets with only majority classes}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{High confidence, high accuracy}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.4}{Results on specialized datasets with both majority and minority classes}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.5}{Combining acceleration methods}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 10
